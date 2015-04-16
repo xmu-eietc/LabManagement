@@ -1,0 +1,14 @@
+#!/bin/sh
+mkdir /home/sw2005
+groupadd sw2005
+
+nos=`cat sw2005nos`
+for ano in $nos
+  do
+    uname=$ano
+    useradd -g sw2005 -d /home/sw2005/$uname -s /bin/bash $uname
+    echo "`echo $uname`:2005" | chpasswd
+    chown $uname:sw2005 /home/sw2005/$uname
+    chmod 700 /home/sw2005/$uname
+    edquota -p sw054388 $uname
+done

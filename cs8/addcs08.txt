@@ -1,0 +1,14 @@
+#!/bin/sh
+
+id=3822
+while (test $id -le 3940)
+  do
+    uname="cs08`echo $id`"
+    useradd -g cs08 -d /home/cs08/$uname -s /bin/bash $uname
+    echo "`echo $uname`:1234" | chpasswd
+    chown $uname:cs08 /home/cs08/$uname
+    edquota -p cs083821 $uname
+    id=`expr $id + 1`
+done
+
+
